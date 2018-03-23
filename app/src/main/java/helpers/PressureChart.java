@@ -15,6 +15,9 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by wildan on 5/11/2017.
  */
@@ -30,27 +33,33 @@ public class PressureChart implements OnChartValueSelectedListener {
         // no description text
         mChart.setNoDataText("You need to provide data for the chart.");
 
-        // enable touch gestures
-        mChart.setTouchEnabled(true);
-
-        // enable scaling and dragging
-        mChart.setDragEnabled(true);
-        mChart.setScaleEnabled(true);
-        mChart.setDrawGridBackground(false);
-
-        // if disabled, scaling can be done on x- and y-axis separately
-        mChart.setPinchZoom(true);
+//        // enable touch gestures
+//        mChart.setTouchEnabled(true);
+//
+//        // enable scaling and dragging
+//        mChart.setDragEnabled(true);
+//        mChart.setScaleEnabled(true);
+//        mChart.setDrawGridBackground(false);
+//
+//        // if disabled, scaling can be done on x- and y-axis separately
+//        mChart.setPinchZoom(true);
 
         // set an alternative background color
         mChart.setBackgroundColor(Color.WHITE);
         mChart.setBorderColor(Color.rgb(67,164,34));
 
-
+        
         LineData data = new LineData();
+//        List<LineDataSet> dataSets = createSets();
+//        for (ILineDataSet s : dataSets) {
+//            data.addDataSet(s);
+//        }
+
         data.setValueTextColor(Color.WHITE);
 
         // add empty data
         mChart.setData(data);
+//        mChart.invalidate();  // ?
 
         // get the legend (only possible after setting data)
         Legend l = mChart.getLegend();
@@ -76,7 +85,6 @@ public class PressureChart implements OnChartValueSelectedListener {
 
         YAxis rightAxis = mChart.getAxisRight();
         rightAxis.setEnabled(false);
-
     }
 
     public void setChart(LineChart chart){ this.mChart = chart; }
@@ -85,51 +93,80 @@ public class PressureChart implements OnChartValueSelectedListener {
 
         LineData data = mChart.getData();
 
-        if (data != null){
+        if (data != null) {
 
-            ILineDataSet set = data.getDataSetByIndex(0);
+            ILineDataSet set = data.getDataSetByLabel(identifier, false);
             // set.addEntry(...); // can be called as well
 
             if (set == null) {
-                set = createSet();
-                data.addDataSet(set);
+                List<LineDataSet> sets = createSets();
+                for (LineDataSet s : sets) {
+                    data.addDataSet(s);
+                }
+
+                set = data.getDataSetByLabel(identifier, false);
             }
 
-            data.addEntry(new Entry(set.getEntryCount(),value),0);
-            Log.w("anjing", set.getEntryForIndex(set.getEntryCount()-1).toString());
+            if (set != null) {
+                set.addEntry(new Entry(set.getEntryCount(), value));
+//            data.addEntry(new Entry(set.getEntryCount(),value),0);
+                Log.w("anjing", set.getEntryForIndex(set.getEntryCount() - 1).toString());
 
-            data.notifyDataChanged();
+                data.notifyDataChanged();
 
-            // let the chart know it's data has changed
-            mChart.notifyDataSetChanged();
+                // let the chart know it's data has changed
+                mChart.notifyDataSetChanged();
 
-            // limit the number of visible entries
-            mChart.setVisibleXRangeMaximum(10);
-            // mChart.setVisibleYRange(30, AxisDependency.LEFT);
+                // limit the number of visible entries
+                mChart.setVisibleXRangeMaximum(10);
+                // mChart.setVisibleYRange(30, AxisDependency.LEFT);
 
-            // move to the latest entry
-            mChart.moveViewTo(set.getEntryCount()-1, data.getYMax(), YAxis.AxisDependency.LEFT);
+                // move to the latest entry
+                mChart.moveViewTo(set.getEntryCount() - 1, data.getYMax(), YAxis.AxisDependency.LEFT);
 
-            // this automatically refreshes the chart (calls invalidate())
-            // mChart.moveViewTo(data.getXValCount()-7, 55f,
-            // AxisDependency.LEFT);
+                // this automatically refreshes the chart (calls invalidate())
+                // mChart.moveViewTo(data.getXValCount()-7, 55f,
+                // AxisDependency.LEFT);
+            }
         }
     }
 
-    private LineDataSet createSet() {
-        LineDataSet set = new LineDataSet(null, "Data");
-        set.setAxisDependency(YAxis.AxisDependency.LEFT);
-        set.setColor(Color.rgb(67, 164, 34));
+    private List<LineDataSet> createSets() {
+        LineDataSet seatOne = new LineDataSet(null, "Pressure1");
+        seatOne.setAxisDependency(YAxis.AxisDependency.LEFT);
+        seatOne.setColor(Color.rgb(67, 164, 34));
         //set.setCircleColor(Color.WHITE);
-        set.setLineWidth(2f);
+        seatOne.setLineWidth(2f);
         //set.setCircleRadius(4f);
-        set.setFillAlpha(65);
-        set.setFillColor(Color.rgb(67, 164, 34));
-        set.setHighLightColor(Color.rgb(67, 164, 34));
-        set.setValueTextColor(Color.rgb(67, 164, 34));
-        set.setValueTextSize(9f);
-        set.setDrawValues(false);
-        return set;
+        seatOne.setFillAlpha(65);
+        seatOne.setFillColor(Color.rgb(67, 164, 34));
+        seatOne.setHighLightColor(Color.rgb(67, 164, 34));
+        seatOne.setValueTextColor(Color.rgb(67, 164, 34));
+        seatOne.setValueTextSize(9f);
+        seatOne.setDrawValues(false);
+
+        LineDataSet seatTwo = new LineDataSet(null, "Pressure2");
+        seatTwo.setAxisDependency(YAxis.AxisDependency.LEFT);
+        seatTwo.setColor(Color.rgb(90, 164, 34));
+        //set.setCircleColor(Color.WHITE);
+        seatTwo.setLineWidth(2f);
+        //set.setCircleRadius(4f);
+        seatTwo.setFillAlpha(65);
+        seatTwo.setFillColor(Color.rgb(90, 164, 34));
+        seatTwo.setHighLightColor(Color.rgb(90, 164, 34));
+        seatTwo.setValueTextColor(Color.rgb(90, 164, 34));
+        seatTwo.setValueTextSize(9f);
+        seatTwo.setDrawValues(false);
+
+        // Apparantly the charting lib assumes that there is a value in index 0 of each data set?
+        seatOne.addEntry(new Entry(0, 0));
+        seatTwo.addEntry(new Entry(0, 0));
+
+        List<LineDataSet> sets = new ArrayList();
+        sets.add(seatOne);
+        sets.add(seatTwo);
+
+        return sets;
     }
 
     @Override
