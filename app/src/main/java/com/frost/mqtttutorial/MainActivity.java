@@ -1,8 +1,10 @@
 package com.frost.mqtttutorial;
 
+import android.graphics.Matrix;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     PressureChart pressureChart;
     LineChart pressureChartView;
 
-    TextView dataReceived;
+    ImageView oarOne, oarTwo;
 
     @Override
 
@@ -29,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dataReceived = (TextView) findViewById(R.id.dataReceived);
+        oarOne = (ImageView) findViewById(R.id.oarOne);
+        oarTwo = (ImageView) findViewById(R.id.oarTwo);
 
         pressureChartView = (LineChart) findViewById(R.id.chart);
         pressureChart = new PressureChart(pressureChartView);
@@ -54,14 +57,18 @@ public class MainActivity extends AppCompatActivity {
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
                 Log.w("MQTTMessageArrived","Topic: " + topic + ", Message:" +
                         " " + mqttMessage.toString());
-                dataReceived.setText(mqttMessage.toString());
-
                 switch (topic) {
                     case "sensor/rowlock":
                         pressureChart.addEntry(Float.valueOf(mqttMessage.toString()), "Pressure1");
                         break;
                     case "sensor/flex":
                         pressureChart.addEntry(Float.valueOf(mqttMessage.toString()), "Pressure2");
+                        break;
+                    case "sensor/rowlock/one/degree":
+                        rotateImage(oarOne, Float.valueOf(mqttMessage.toString()), 50, 50);  // ToDo: Determine Pivots
+                        break;
+                    case "sensor/rowlock/two/degree":
+                        rotateImage(oarTwo, Float.valueOf(mqttMessage.toString()), 50, 50);  // ToDo: Determine Pivots
                         break;
                 }
             }
@@ -71,5 +78,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void rotateImage(ImageView view, float angle, float pivotX, float pivotY) {
+        // ToDo Probably smoothen rotation?
+        Matrix matrix = new Matrix();
+        view.setScaleType(ImageView.ScaleType.MATRIX);
+        matrix.postRotate((float) angle, pivotX, pivotY);
+        view.setImageMatrix(matrix);
     }
 }

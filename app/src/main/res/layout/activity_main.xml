@@ -6,16 +6,44 @@
     android:layout_height="match_parent"
     tools:context="com.frost.mqtttutorial.MainActivity">
 
-    <TextView
-        android:id="@+id/dataReceived"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Connected. Waiting for Data..."
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.192" />
+        android:paddingTop="30dp">
+
+        <ImageView
+            android:id="@+id/boat"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:srcCompat="@drawable/boat" />
+
+        <ImageView
+            android:id="@+id/oarOne"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="365dp"
+            android:layout_marginRight="32dp"
+            android:paddingLeft="150dp"
+            android:paddingRight="150dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/oar" />
+
+        <ImageView
+            android:id="@+id/oarTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="416dp"
+            android:layout_marginRight="416dp"
+            android:paddingLeft="150dp"
+            android:paddingRight="150dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/oar" />
+
+    </RelativeLayout>
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"
