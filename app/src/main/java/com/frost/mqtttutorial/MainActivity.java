@@ -11,14 +11,15 @@ import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
-import helpers.ChartHelper;
+import helpers.PressureChart;
 import helpers.MqttHelper;
 
 public class MainActivity extends AppCompatActivity {
 
     MqttHelper mqttHelper;
-    ChartHelper mChart;
-    LineChart chart;
+
+    PressureChart pressureChart;
+    LineChart pressureChartView;
 
     TextView dataReceived;
 
@@ -29,8 +30,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dataReceived = (TextView) findViewById(R.id.dataReceived);
-        chart = (LineChart) findViewById(R.id.chart);
-        mChart = new ChartHelper(chart);
+
+        pressureChartView = (LineChart) findViewById(R.id.chart);
+        pressureChart = new PressureChart(pressureChartView);
 
         startMqtt();
     }
@@ -52,7 +54,15 @@ public class MainActivity extends AppCompatActivity {
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
                 Log.w("Debug",mqttMessage.toString());
                 dataReceived.setText(mqttMessage.toString());
-                mChart.addEntry(Float.valueOf(mqttMessage.toString()));
+
+                switch (topic) {
+                    case "tms7/sensor/pressure1":
+                        pressureChart.addEntry(Float.valueOf(mqttMessage.toString()), topic);
+                        break;
+                    case "tms7/sensor/pressure2":
+                        pressureChart.addEntry(Float.valueOf(mqttMessage.toString()), topic);
+                        break;
+                }
             }
 
             @Override

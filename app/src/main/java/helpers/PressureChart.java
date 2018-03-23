@@ -19,11 +19,11 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
  * Created by wildan on 5/11/2017.
  */
 
-public class ChartHelper implements OnChartValueSelectedListener {
+public class PressureChart implements OnChartValueSelectedListener {
 
     private LineChart mChart;
 
-    public ChartHelper(LineChart chart) {
+    public PressureChart(LineChart chart) {
         mChart = chart;
         mChart.setOnChartValueSelectedListener(this);
 
@@ -81,7 +81,7 @@ public class ChartHelper implements OnChartValueSelectedListener {
 
     public void setChart(LineChart chart){ this.mChart = chart; }
 
-    public void addEntry(float value) {
+    public void addEntry(float value, String identifier) {
 
         LineData data = mChart.getData();
 
