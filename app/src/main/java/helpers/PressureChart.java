@@ -76,11 +76,12 @@ public class PressureChart implements OnChartValueSelectedListener {
         l.setTextColor(Color.rgb(67, 164, 34));
 
         XAxis xl = mChart.getXAxis();
-        xl.setTypeface(Typeface.MONOSPACE);
-        xl.setTextColor(Color.rgb(67, 164, 34));
-        xl.setDrawGridLines(false);
-        xl.setAvoidFirstLastClipping(true);
-        xl.setEnabled(true);
+//        xl.setTypeface(Typeface.MONOSPACE);
+//        xl.setTextColor(Color.rgb(67, 164, 34));
+//        xl.setDrawGridLines(false);
+//        xl.setAvoidFirstLastClipping(true);
+//        xl.setEnabled(true);
+        xl.setEnabled(false);
 
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.setTypeface(Typeface.MONOSPACE);
@@ -146,6 +147,7 @@ public class PressureChart implements OnChartValueSelectedListener {
         seatOne.setValueTextColor(Color.rgb(255, 0, 0));
         seatOne.setValueTextSize(9f);
         seatOne.setDrawValues(false);
+        seatOne.setDrawCircles(false);
 
         LineDataSet seatTwo = new LineDataSet(null, "Pressure2");
         seatTwo.setAxisDependency(YAxis.AxisDependency.LEFT);
@@ -159,6 +161,7 @@ public class PressureChart implements OnChartValueSelectedListener {
         seatTwo.setValueTextColor(Color.rgb(90, 164, 34));
         seatTwo.setValueTextSize(9f);
         seatTwo.setDrawValues(false);
+        seatTwo.setDrawCircles(false);
 
         // Apparantly the charting lib assumes that there is a value in index 0 of each data set?
         seatOne.addEntry(new Entry(0, 0));
