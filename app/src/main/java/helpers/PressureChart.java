@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.util.Log;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -43,6 +44,10 @@ public class PressureChart implements OnChartValueSelectedListener {
 //
 //        // if disabled, scaling can be done on x- and y-axis separately
 //        mChart.setPinchZoom(true);
+
+        Description description = new Description();
+        description.setText("Pressure of all athlets");
+        mChart.setDescription(description);
 
         // set an alternative background color
         mChart.setBackgroundColor(Color.WHITE);
@@ -110,7 +115,7 @@ public class PressureChart implements OnChartValueSelectedListener {
             if (set != null) {
                 set.addEntry(new Entry(set.getEntryCount(), value));
 //            data.addEntry(new Entry(set.getEntryCount(),value),0);
-                Log.w("anjing", set.getEntryForIndex(set.getEntryCount() - 1).toString());
+                Log.w("PressureGraphNewEntry", set.getEntryForIndex(set.getEntryCount() - 1).toString());
 
                 data.notifyDataChanged();
 
@@ -123,10 +128,7 @@ public class PressureChart implements OnChartValueSelectedListener {
 
                 // move to the latest entry
                 mChart.moveViewTo(set.getEntryCount() - 1, data.getYMax(), YAxis.AxisDependency.LEFT);
-
-                // this automatically refreshes the chart (calls invalidate())
-                // mChart.moveViewTo(data.getXValCount()-7, 55f,
-                // AxisDependency.LEFT);
+                // moveViewTo automatically refreshes the chart (calls invalidate())
             }
         }
     }
@@ -134,14 +136,14 @@ public class PressureChart implements OnChartValueSelectedListener {
     private List<LineDataSet> createSets() {
         LineDataSet seatOne = new LineDataSet(null, "Pressure1");
         seatOne.setAxisDependency(YAxis.AxisDependency.LEFT);
-        seatOne.setColor(Color.rgb(67, 164, 34));
+        seatOne.setColor(Color.rgb(255, 0, 0));
         //set.setCircleColor(Color.WHITE);
         seatOne.setLineWidth(2f);
         //set.setCircleRadius(4f);
-        seatOne.setFillAlpha(65);
-        seatOne.setFillColor(Color.rgb(67, 164, 34));
-        seatOne.setHighLightColor(Color.rgb(67, 164, 34));
-        seatOne.setValueTextColor(Color.rgb(67, 164, 34));
+//        seatOne.setFillAlpha(65);
+//        seatOne.setFillColor(Color.rgb(255, 0, 0));
+        seatOne.setHighLightColor(Color.rgb(255, 0, 0));
+        seatOne.setValueTextColor(Color.rgb(255, 0, 0));
         seatOne.setValueTextSize(9f);
         seatOne.setDrawValues(false);
 
@@ -151,8 +153,8 @@ public class PressureChart implements OnChartValueSelectedListener {
         //set.setCircleColor(Color.WHITE);
         seatTwo.setLineWidth(2f);
         //set.setCircleRadius(4f);
-        seatTwo.setFillAlpha(65);
-        seatTwo.setFillColor(Color.rgb(90, 164, 34));
+//        seatTwo.setFillAlpha(65);
+//        seatTwo.setFillColor(Color.rgb(90, 164, 34));
         seatTwo.setHighLightColor(Color.rgb(90, 164, 34));
         seatTwo.setValueTextColor(Color.rgb(90, 164, 34));
         seatTwo.setValueTextSize(9f);

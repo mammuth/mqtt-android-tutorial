@@ -20,10 +20,11 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 public class MqttHelper {
     public MqttAndroidClient mqttAndroidClient;
 
-    final String serverUri = "tcp://test.mosquitto.org:1883";
+//    final String serverUri = "tcp://test.mosquitto.org:1883";
+    final String serverUri = "tcp://10.3.141.1:1883";
 
     final String clientId = "ExampleAndroidClient";
-    final String subscriptionTopic = "tms7/sensor/#";
+    final String subscriptionTopic = "sensor/#";
 
 //    final String username = "xxxxxxx";
 //    final String password = "yyyyyyy";

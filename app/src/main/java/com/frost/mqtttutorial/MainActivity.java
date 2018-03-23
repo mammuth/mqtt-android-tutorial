@@ -52,14 +52,15 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
-                Log.w("MQTTMessageArrived",mqttMessage.toString());
+                Log.w("MQTTMessageArrived","Topic: " + topic + ", Message:" +
+                        " " + mqttMessage.toString());
                 dataReceived.setText(mqttMessage.toString());
 
                 switch (topic) {
-                    case "tms7/sensor/pressure1":
+                    case "sensor/rowlock":
                         pressureChart.addEntry(Float.valueOf(mqttMessage.toString()), "Pressure1");
                         break;
-                    case "tms7/sensor/pressure2":
+                    case "sensor/flex":
                         pressureChart.addEntry(Float.valueOf(mqttMessage.toString()), "Pressure2");
                         break;
                 }
