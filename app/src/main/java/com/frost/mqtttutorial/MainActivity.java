@@ -59,16 +59,17 @@ public class MainActivity extends AppCompatActivity {
                         " " + mqttMessage.toString());
                 switch (topic) {
                     case "sensor/rowlock":
-                        pressureChart.addEntry(Float.valueOf(mqttMessage.toString()), "Pressure1");
+//                        pressureChart.addEntry(Float.valueOf(mqttMessage.toString()), "Pressure1");
                         break;
                     case "sensor/flex":
                         pressureChart.addEntry(Float.valueOf(mqttMessage.toString()), "Pressure2");
                         break;
                     case "sensor/rowlock/one/degree":
-                        rotateImage(oarOne, Float.valueOf(mqttMessage.toString()), 50, 50);  // ToDo: Determine Pivots
+                        Log.w("MQTTMessageArived", "Rotating Oar One");
+                        rotateImage(oarOne, Float.valueOf(mqttMessage.toString()), 5, oarOne.getHeight());  // ToDo: Determine Pivots
                         break;
                     case "sensor/rowlock/two/degree":
-                        rotateImage(oarTwo, Float.valueOf(mqttMessage.toString()), 50, 50);  // ToDo: Determine Pivots
+                        rotateImage(oarTwo, Float.valueOf(mqttMessage.toString()), 5, oarTwo.getHeight());  // ToDo: Determine Pivots
                         break;
                 }
             }

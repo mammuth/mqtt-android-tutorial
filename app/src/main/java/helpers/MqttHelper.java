@@ -2,6 +2,7 @@ package helpers;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.DisconnectedBufferOptions;
@@ -26,10 +27,13 @@ public class MqttHelper {
     final String clientId = "ExampleAndroidClient";
     final String subscriptionTopic = "sensor/#";
 
+    private Context ctx;
+
 //    final String username = "xxxxxxx";
 //    final String password = "yyyyyyy";
 
     public MqttHelper(Context context){
+        ctx = context;
         mqttAndroidClient = new MqttAndroidClient(context, serverUri, clientId);
         mqttAndroidClient.setCallback(new MqttCallbackExtended() {
             @Override
@@ -84,6 +88,8 @@ public class MqttHelper {
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     Log.w("Mqtt", "Failed to connect to: " + serverUri + exception.toString());
+                    Toast toast = Toast.makeText(ctx, "Failed to connect to MQTT. Wrong WiFi?", Toast.LENGTH_LONG);
+                    toast.show();
                 }
             });
 
