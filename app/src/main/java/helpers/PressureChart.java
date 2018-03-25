@@ -46,7 +46,7 @@ public class PressureChart implements OnChartValueSelectedListener {
 //        mChart.setPinchZoom(true);
 
         Description description = new Description();
-        description.setText("Pressure of all athlets");
+        description.setText("Pressure of all athletes");
         mChart.setDescription(description);
 
         // set an alternative background color
