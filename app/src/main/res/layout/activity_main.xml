@@ -8,37 +8,32 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="30dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/oarOne"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="365dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginTop="50dp"
-            android:paddingLeft="225dp"
-            android:paddingRight="150dp"
-            android:paddingTop="10dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="335dp"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="200dp"
+            android:paddingRight="200dp"
             app:srcCompat="@drawable/oar" />
 
         <ImageView
             android:id="@+id/oarTwo"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="365dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginTop="50dp"
-            android:paddingLeft="320dp"
-            android:paddingRight="150dp"
-            android:paddingTop="10dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="500dp"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="200dp"
+            android:paddingRight="200dp"
             app:srcCompat="@drawable/oar" />
 
         <ImageView
             android:id="@+id/boat"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="500dp"
             app:srcCompat="@drawable/boat" />
 
     </RelativeLayout>

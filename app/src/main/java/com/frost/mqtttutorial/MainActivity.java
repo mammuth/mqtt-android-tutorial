@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.w("MQTTMessageArrived","Topic: " + topic + ", Message:" +
                         " " + mqttMessage.toString());
                 switch (topic) {
-                    case "sensor/rowlock":
-//                        pressureChart.addEntry(Float.valueOf(mqttMessage.toString()), "Pressure1");
+                    case "sensor/flex/one":
+                        pressureChart.addEntry(Float.valueOf(mqttMessage.toString()), "Pressure1");
                         break;
                     case "sensor/flex":
                         pressureChart.addEntry(Float.valueOf(mqttMessage.toString()), "Pressure2");
@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void rotateImage(ImageView view, float angle, float pivotX, float pivotY) {
-        // ToDo Probably smoothen rotation?
         Matrix matrix = new Matrix();
         view.setScaleType(ImageView.ScaleType.MATRIX);
         matrix.postRotate((float) angle, pivotX, pivotY);
