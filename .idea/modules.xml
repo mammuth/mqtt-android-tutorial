@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MQTTTutorial.iml" filepath="$PROJECT_DIR$/MQTTTutorial.iml" />
+      <module fileurl="file://C:\Users\Albrecht\Documents\Uni\Master\05 SS18\Think.Make.Start\App\mqtt-android-tutorial\MQTTTutorial.iml" filepath="C:\Users\Albrecht\Documents\Uni\Master\05 SS18\Think.Make.Start\App\mqtt-android-tutorial\MQTTTutorial.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Albrecht\Documents\Uni\Master\05 SS18\Think.Make.Start\App\mqtt-android-tutorial\app\app.iml" filepath="C:\Users\Albrecht\Documents\Uni\Master\05 SS18\Think.Make.Start\App\mqtt-android-tutorial\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/mqtt-android-tutorial.iml" filepath="$PROJECT_DIR$/mqtt-android-tutorial.iml" />
     </modules>
   </component>
