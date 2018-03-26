@@ -1,6 +1,5 @@
 package com.frost.mqtttutorial;
 
-import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,13 +14,15 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import helpers.PressureChart;
 import helpers.MqttHelper;
+import helpers.SeatChart;
 
 public class MainActivity extends AppCompatActivity {
 
     MqttHelper mqttHelper;
 
     PressureChart pressureChart;
-    LineChart pressureChartView;
+    SeatChart seatChart;
+    LineChart pressureChartView, seatChartView;
 
     ImageView oarTopOne, oarTopTwo, oarBottomOne, oarBottomTwo;
 
@@ -36,8 +37,11 @@ public class MainActivity extends AppCompatActivity {
         oarBottomOne = (ImageView) findViewById(R.id.oarBottomOne);
         oarBottomTwo = (ImageView) findViewById(R.id.oarBottomTwo);
 
-        pressureChartView = (LineChart) findViewById(R.id.chart);
+        pressureChartView = (LineChart) findViewById(R.id.pressureChart);
         pressureChart = new PressureChart(pressureChartView);
+
+        seatChartView = (LineChart) findViewById(R.id.seatChart);
+        seatChart = new SeatChart(seatChartView);
 
         startMqtt();
     }
@@ -74,6 +78,12 @@ public class MainActivity extends AppCompatActivity {
                     case "sensor/rowlock/two/degree":
                         rotateImage(oarTopTwo, Float.valueOf(mqttMessage.toString()) - 90, 13, 270);
                         rotateImage(oarBottomTwo, 180 - Float.valueOf(mqttMessage.toString()) - 90, 13, 130);
+                        break;
+                    case "sensor/seat/one":
+                        seatChart.addEntry(Float.valueOf(mqttMessage.toString()), "Seat1");
+                        break;
+                    case "sensor/seat/two":
+                        seatChart.addEntry(Float.valueOf(mqttMessage.toString()), "Seat2");
                         break;
                 }
             }
