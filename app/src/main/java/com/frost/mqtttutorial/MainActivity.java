@@ -72,12 +72,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case "sensor/rowlock/one/degree":
                         Log.w("MQTTMessageArived", "Rotating Oar One");
-                        rotateImage(oarTopOne, Float.valueOf(mqttMessage.toString()) - 90, 13, 270);
-                        rotateImage(oarBottomOne, 180 - Float.valueOf(mqttMessage.toString()) - 90, 13, 130);
+                        rotateImage(oarTopOne, 180 - Float.valueOf(mqttMessage.toString()) - 90, 13, 270);
+                        rotateImage(oarBottomOne, Float.valueOf(mqttMessage.toString()) - 90, 13, 130);
                         break;
                     case "sensor/rowlock/two/degree":
-                        rotateImage(oarTopTwo, Float.valueOf(mqttMessage.toString()) - 90, 13, 270);
-                        rotateImage(oarBottomTwo, 180 - Float.valueOf(mqttMessage.toString()) - 90, 13, 130);
+                        rotateImage(oarTopTwo, 180 - Float.valueOf(mqttMessage.toString()) - 90, 13, 270);
+                        rotateImage(oarBottomTwo, Float.valueOf(mqttMessage.toString()) - 90, 13, 130);
                         break;
                     case "sensor/seat/one":
                         seatChart.addEntry(Float.valueOf(mqttMessage.toString()), "Seat1");
