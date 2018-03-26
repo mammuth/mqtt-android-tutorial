@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
         oarTopOne = (ImageView) findViewById(R.id.oarTopOne);
         oarTopTwo = (ImageView) findViewById(R.id.oarTopTwo);
+        oarBottomOne = (ImageView) findViewById(R.id.oarBottomOne);
+        oarBottomTwo = (ImageView) findViewById(R.id.oarBottomTwo);
 
         pressureChartView = (LineChart) findViewById(R.id.chart);
         pressureChart = new PressureChart(pressureChartView);
@@ -57,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
                 Log.w("MQTTMessageArrived","Topic: " + topic + ", Message:" +
                         " " + mqttMessage.toString());
-                Float degrees;
                 switch (topic) {
                     case "sensor/flex/one":
                         pressureChart.addEntry(Float.valueOf(mqttMessage.toString()), "Pressure1");
@@ -67,12 +68,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case "sensor/rowlock/one/degree":
                         Log.w("MQTTMessageArived", "Rotating Oar One");
-                        degrees = Float.valueOf(mqttMessage.toString()) - 90;
-                        rotateImage(oarTopOne, degrees, 13, 270);
+                        rotateImage(oarTopOne, Float.valueOf(mqttMessage.toString()) - 90, 13, 270);
+                        rotateImage(oarBottomOne, 180 - Float.valueOf(mqttMessage.toString()) - 90, 13, 130);
                         break;
                     case "sensor/rowlock/two/degree":
-                        degrees = Float.valueOf(mqttMessage.toString()) - 90;
-                        rotateImage(oarTopTwo, degrees, 13, 270);
+                        rotateImage(oarTopTwo, Float.valueOf(mqttMessage.toString()) - 90, 13, 270);
+                        rotateImage(oarBottomTwo, 180 - Float.valueOf(mqttMessage.toString()) - 90, 13, 130);
                         break;
                 }
             }
