@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
                 Log.w("MQTTMessageArrived","Topic: " + topic + ", Message:" +
                         " " + mqttMessage.toString());
+                Float degrees;
                 switch (topic) {
                     case "sensor/flex/one":
                         pressureChart.addEntry(Float.valueOf(mqttMessage.toString()), "Pressure1");
@@ -66,10 +67,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case "sensor/rowlock/one/degree":
                         Log.w("MQTTMessageArived", "Rotating Oar One");
-                        rotateImage(oarOne, Float.valueOf(mqttMessage.toString()), 5, oarOne.getHeight());  // ToDo: Determine Pivots
+                        degrees = Float.valueOf(mqttMessage.toString()) - 90;
+                        rotateImage(oarOne, degrees, 5, oarOne.getHeight());  // ToDo: Determine Pivots
                         break;
                     case "sensor/rowlock/two/degree":
-                        rotateImage(oarTwo, Float.valueOf(mqttMessage.toString()), 5, oarTwo.getHeight());  // ToDo: Determine Pivots
+                        degrees = Float.valueOf(mqttMessage.toString()) - 90;
+                        rotateImage(oarTwo, degrees, 5, oarTwo.getHeight());  // ToDo: Determine Pivots
                         break;
                 }
             }

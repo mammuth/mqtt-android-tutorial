@@ -25,7 +25,7 @@ public class MqttHelper {
 //    final String serverUri = "tcp://10.3.141.1:1883";
     final String serverUri = "tcp://192.168.144.101:1883";
 
-    final String clientId = "ExampleAndroidClient";
+    final String clientId = "RowSyncAndroid";
     final String subscriptionTopic = "sensor/#";
 
     private Context ctx;
