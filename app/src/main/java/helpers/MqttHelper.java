@@ -22,7 +22,8 @@ public class MqttHelper {
     public MqttAndroidClient mqttAndroidClient;
 
 //    final String serverUri = "tcp://test.mosquitto.org:1883";
-    final String serverUri = "tcp://10.3.141.1:1883";
+//    final String serverUri = "tcp://10.3.141.1:1883";
+    final String serverUri = "tcp://192.168.144.101:1883";
 
     final String clientId = "ExampleAndroidClient";
     final String subscriptionTopic = "sensor/#";
