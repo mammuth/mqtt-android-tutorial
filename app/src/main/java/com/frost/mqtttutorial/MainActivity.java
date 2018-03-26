@@ -1,11 +1,11 @@
 package com.frost.mqtttutorial;
 
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     PressureChart pressureChart;
     LineChart pressureChartView;
 
-    ImageView oarOne, oarTwo;
+    ImageView oarTopOne, oarTopTwo, oarBottomOne, oarBottomTwo;
 
     @Override
 
@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        oarOne = (ImageView) findViewById(R.id.oarOne);
-        oarTwo = (ImageView) findViewById(R.id.oarTwo);
+        oarTopOne = (ImageView) findViewById(R.id.oarTopOne);
+        oarTopTwo = (ImageView) findViewById(R.id.oarTopTwo);
 
         pressureChartView = (LineChart) findViewById(R.id.chart);
         pressureChart = new PressureChart(pressureChartView);
@@ -62,17 +62,17 @@ public class MainActivity extends AppCompatActivity {
                     case "sensor/flex/one":
                         pressureChart.addEntry(Float.valueOf(mqttMessage.toString()), "Pressure1");
                         break;
-                    case "sensor/flex":
+                    case "sensor/flex/two":
                         pressureChart.addEntry(Float.valueOf(mqttMessage.toString()), "Pressure2");
                         break;
                     case "sensor/rowlock/one/degree":
                         Log.w("MQTTMessageArived", "Rotating Oar One");
                         degrees = Float.valueOf(mqttMessage.toString()) - 90;
-                        rotateImage(oarOne, degrees, 5, oarOne.getHeight());  // ToDo: Determine Pivots
+                        rotateImage(oarTopOne, degrees, 13, 270);
                         break;
                     case "sensor/rowlock/two/degree":
                         degrees = Float.valueOf(mqttMessage.toString()) - 90;
-                        rotateImage(oarTwo, degrees, 5, oarTwo.getHeight());  // ToDo: Determine Pivots
+                        rotateImage(oarTopTwo, degrees, 13, 270);
                         break;
                 }
             }
@@ -86,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void rotateImage(ImageView view, float angle, float pivotX, float pivotY) {
         Matrix matrix = new Matrix();
+        matrix.postRotate(angle, pivotX, pivotY);
         view.setScaleType(ImageView.ScaleType.MATRIX);
-        matrix.postRotate((float) angle, pivotX, pivotY);
         view.setImageMatrix(matrix);
     }
 }
