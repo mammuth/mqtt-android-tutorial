@@ -164,8 +164,8 @@ public class PressureChart implements OnChartValueSelectedListener {
         seatTwo.setDrawCircles(false);
 
         // Apparantly the charting lib assumes that there is a value in index 0 of each data set?
-        seatOne.addEntry(new Entry(0, 2000));
-        seatTwo.addEntry(new Entry(0, 2000));
+        seatOne.addEntry(new Entry(0, 100));
+        seatTwo.addEntry(new Entry(0, 100));
 
         List<LineDataSet> sets = new ArrayList();
         sets.add(seatOne);
